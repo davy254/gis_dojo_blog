@@ -1,0 +1,10 @@
+
+
+.question {
+    border-radius:5px
+}
+
+.detail,.results , .col-md-3 {
+    border-radius:10px
+}
+
