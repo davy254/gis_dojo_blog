@@ -27,7 +27,7 @@ SECRET_KEY = '+jcl=-34hd@_7c5il+d$2%gx&^)*(06+0pvi+@+jy+2n)61(sc'
 DEBUG = True
 #DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gisdojo.herokuapp.com/',]
 
 
 # Application definition
