@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+        <h1><u>Send us a message..</u></h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy}}
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit" href="{% url 'blog-contact-us-success'  %}" >Send</button>
+            </div>
+
+         </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The GIS Dojo</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="{% static 'blog/css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+	<!-- Social Share Kit CSS -->
+	<link rel="stylesheet" href="{% static 'blog/social_share_kit/css/social-share-kit.css' %}" type="text/css">
+	<!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    
+
+    
+</head>
+<body>
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
+
+    <div class="container" style="box-shadow: 0 0 0 20px rgba(0,0,0,0.03); margin-bottom:30px;" >
+		<div class="row" style="background-color:white;">
+			<div class="mx-auto">
+				<img src="{% static 'blog/logo4.PNG' %}" >
+			</div>
+		</div>	
+		<div class="row">
+			<nav class="navbar navbar-expand-md navbar-dark bg-steel " style="width:100%">
+				<div class="container">
+				  <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Thinking Spatially</a>
+				  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				  </button>
+				  <div class="collapse navbar-collapse" id="navbarToggle">
+					<div class="navbar-nav mr-auto" >
+					  <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+					  <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+						<a class="nav-item nav-link" href="{% url 'projects:projects' %}">Projects</a>
+						<a class="nav-item nav-link" href="{% url 'blog-contact-us' %}">Contact Us</a>
+					</div>
+                <!-- Navbar Right Side -->
+					<div class="navbar-nav">
+						{% if user.is_staff %}
+							 <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+						{% endif %}
+                        {% if user.is_authenticated %}
+
+                             <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+
+                        {% endif %}
+
+					</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+		
+			
+				<div class="row " style="margin-top:15px;">
+
+				
+					<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 " style="margin-right:5px">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor%}
+                            {% endif %}
+
+							{% block content %} {% endblock %}
+
+					</div>
+					
+					<div class="mx-auto col-lg-3 col-md-3 col-sm-5 col-xs-11 ">
+						<div class="content-section">
+							<h3>Social Sidebar</h3>
+							<p class='text-muted'>Share this blog.</p>
+							<div class="social">
+								<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+								<div class="twitter" >
+									<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script
+								</div>
+							</div>
+							  <ul class="list-group">
+
+								{% for event in event_list %}
+									<li class="list-group-item list-group-item-light">{{ event.name }}---{{ event.location }}---{{ event.date1|date:"F d, Y" }}</li>
+								{% endfor %}
+							  </ul>
+						</div>
+						
+					</div>
+				</div>
+			
+	</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="{% static 'blog/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<footer class="footer mt-auto py-3">
+	  <div class="container">
+		<span class="text-muted">© 2019 David Munyiri.</span>
+	  </div>
+	</footer>
+</body>
+</html>
